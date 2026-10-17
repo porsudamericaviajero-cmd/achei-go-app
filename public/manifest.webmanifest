@@ -1,0 +1,20 @@
+{
+  "name": "Achei Aqui GO - Região Leste",
+  "short_name": "Achei Aqui GO",
+  "description": "Guia comercial completo e rápido da Região Leste de Goiânia. Encontre lojas locais e fale direto no WhatsApp.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F2D1F",
+  "theme_color": "#0F2D1F",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping", "business", "utilities"]
+}

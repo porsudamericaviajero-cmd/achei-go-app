@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "nome": "Materiais Novo Mundo",
+    "cat": "Materiais de Construção",
+    "bairro": "Jardim Novo Mundo",
+    "dist": "500m",
+    "zap": "5562996707046",
+    "aval": "4.8",
+    "aberto": true
+  },
+  {
+    "id": 2,
+    "nome": "Auto Peças Vila Pedroso",
+    "cat": "Auto Peças",
+    "bairro": "Vila Pedroso",
+    "dist": "800m",
+    "zap": "5562996707046",
+    "aval": "4.6",
+    "aberto": true
+  },
+  {
+    "id": 3,
+    "nome": "Padaria Aroeiras",
+    "cat": "Padaria",
+    "bairro": "Aroeiras",
+    "dist": "300m",
+    "zap": "5562996707046",
+    "aval": "4.9",
+    "aberto": true
+  },
+  {
+    "id": 4,
+    "nome": "Farmácia Popular Leste",
+    "cat": "Farmácia",
+    "bairro": "Jardim Novo Mundo",
+    "dist": "450m",
+    "zap": "5562996707046",
+    "aval": "4.7",
+    "aberto": true
+  },
+  {
+    "id": 5,
+    "nome": "Mercadinho Riviera",
+    "cat": "Mercado",
+    "bairro": "Riviera",
+    "dist": "1.2km",
+    "zap": "5562996707046",
+    "aval": "4.5",
+    "aberto": true
+  },
+  {
+    "id": 6,
+    "nome": "Bolo da Vó - Alphaville",
+    "cat": "Confeitaria",
+    "bairro": "Alphaville Flamboyant",
+    "dist": "900m",
+    "zap": "5562996707046",
+    "aval": "5.0",
+    "aberto": true
+  },
+  {
+    "id": 7,
+    "nome": "DELÍCIAS DA ANA",
+    "cat": "Confeitaria",
+    "bairro": "Jardim Novo Mundo",
+    "dist": "400m",
+    "zap": "5562996707046",
+    "aval": "5.0",
+    "aberto": true
+  },
+  {
+    "id": 8,
+    "nome": "Barbearia Estilo Leste",
+    "cat": "Barbearia",
+    "bairro": "Jardim Goiás",
+    "dist": "600m",
+    "zap": "5562996707046",
+    "aval": "4.9",
+    "aberto": true
+  }
+]

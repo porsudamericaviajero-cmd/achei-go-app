@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Gestão Comercial • Achei Aqui GO</title>
+  <meta name="theme-color" content="#0A1E14">
+  <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+  <link rel="stylesheet" href="/src/styles/admin.css">
+</head>
+<body>
+
+  <!-- BARREIRA DE AUTENTICAÇÃO / LOGIN DO ADMIN -->
+  <div id="authGate" class="auth-gate">
+    <div class="auth-box">
+      <img src="/icons/icon.svg" width="56" height="56" alt="Achei Aqui GO" style="margin-bottom:12px;">
+      <h2 style="font-size:22px;color:#0F2D1F;font-weight:800;">Acesso Restrito</h2>
+      <p style="font-size:13px;color:#64748B;margin-top:4px;">Digite a senha de administrador para gerenciar o Achei Aqui GO:</p>
+      
+      <input 
+        type="password" 
+        id="adminPasswordInput" 
+        placeholder="••••••••" 
+        autocomplete="current-password"
+        onkeydown="if(event.key==='Enter') window.tentarLoginAdmin()"
+      >
+
+      <p id="authErrorMsg" style="display:none;color:#DC2626;font-size:13px;font-weight:700;margin-bottom:12px;"></p>
+
+      <button class="btn-save-store" onclick="window.tentarLoginAdmin()">
+        🔐 ACESSAR PAINEL
+      </button>
+
+      <a href="/" style="display:inline-block;margin-top:16px;color:#64748B;font-size:13px;text-decoration:none;">
+        ← Voltar para o App do Cliente
+      </a>
+    </div>
+  </div>
+
+  <!-- PAINEL ADMINISTRATIVO PRINCIPAL -->
+  <div class="admin-container">
+    <div class="admin-header">
+      <div>
+        <a href="/" class="back-link">← Voltar para o App do Cliente</a>
+        <div class="admin-title-wrap" style="margin-top:8px;">
+          <h1>Painel <span>Administrativo</span></h1>
+          <p class="admin-subtitle">Gestão de estabelecimentos, aprovações e leads da Região Leste</p>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button onclick="window.fazerLogoutAdmin()" style="background:rgba(255,255,255,0.1);color:white;border:none;padding:8px 14px;border-radius:8px;font-size:13px;cursor:pointer;">
+          🚪 Sair
+        </button>
+      </div>
+    </div>
+
+    <!-- CARDS DE ESTATÍSTICAS EM TEMPO REAL -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-title">🏪 Total de Lojas</span>
+        <span id="statTotal" class="stat-number">0</span>
+      </div>
+
+      <div class="stat-card success">
+        <span class="stat-title">🟢 Lojas Ativas</span>
+        <span id="statAtivas" class="stat-number">0</span>
+      </div>
+
+      <div class="stat-card alert">
+        <span class="stat-title">⏳ Aguardando Aprovação</span>
+        <span id="statPendentes" class="stat-number">0</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-title">📲 Contatos no WhatsApp</span>
+        <span id="statCliques" class="stat-number">0</span>
+      </div>
+    </div>
+
+    <!-- NAVEGAÇÃO POR ABAS -->
+    <div class="tabs-nav">
+      <button id="tab_todas" class="tab-btn active" onclick="window.mudarAba('todas')">
+        Todas as Lojas
+      </button>
+      <button id="tab_pendentes" class="tab-btn" onclick="window.mudarAba('pendentes')">
+        Aguardando Aprovação <span id="badgePendentes" class="tab-badge" style="display:none;background:#FF6B2B">0</span>
+      </button>
+      <button id="tab_ativas" class="tab-btn" onclick="window.mudarAba('ativas')">
+        Apenas Ativas
+      </button>
+      <button id="tab_nova" class="tab-btn" onclick="window.mudarAba('nova')">
+        ➕ Cadastrar Nova Loja
+      </button>
+    </div>
+
+    <!-- FORMULÁRIO DE CADASTRO / EDIÇÃO -->
+    <div id="cardFormLoja" class="admin-card" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h2 id="formTitulo" style="margin-bottom:0">➕ Cadastrar Nova Loja</h2>
+        <button id="btnCancelarEdicao" style="display:none;background:#F1F5F9;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;" onclick="window.limparFormularioEdicao(); window.mudarAba('todas');">
+          Cancelar Edição
+        </button>
+      </div>
+
+      <form id="formLojaAdmin">
+        <div class="form-grid">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Nome da Loja *</label>
+            <input id="input_nome" required placeholder="Ex: Panificadora Central" style="width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:8px;">
+          </div>
+
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Categoria *</label>
+            <select id="input_cat" style="width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:8px;">
+              <option value="Materiais de Construção">Materiais de Construção</option>
+              <option value="Confeitaria">Confeitaria</option>
+              <option value="Auto Peças">Auto Peças</option>
+              <option value="Padaria">Padaria</option>
+              <option value="Farmácia">Farmácia</option>
+              <option value="Mercado">Mercado</option>
+              <option value="Restaurante">Restaurante</option>
+              <option value="Barbearia">Barbearia</option>
+              <option value="Pet Shop">Pet Shop</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Bairro da Região Leste *</label>
+            <select id="input_bairro" style="width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:8px;">
+              <option value="Jardim Novo Mundo">Jardim Novo Mundo</option>
+              <option value="Vila Pedroso">Vila Pedroso</option>
+              <option value="Aroeiras">Aroeiras</option>
+              <option value="Riviera">Riviera</option>
+              <option value="Alphaville Flamboyant">Alphaville Flamboyant</option>
+              <option value="Jardim Goiás">Jardim Goiás</option>
+              <option value="Vila Bandeirante">Vila Bandeirante</option>
+              <option value="Água Branca">Água Branca</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">WhatsApp * (Com DDD)</label>
+            <input id="input_zap" required placeholder="(62) 99999-9999" style="width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:8px;">
+          </div>
+
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Endereço Completo</label>
+            <input id="input_end" placeholder="Ex: Av. New York, Qd. 15, Jardim Novo Mundo" style="width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:8px;">
+          </div>
+
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Avaliação (0 a 5.0)</label>
+            <input id="input_aval" type="number" step="0.1" min="1" max="5" value="5.0" style="width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:8px;">
+          </div>
+
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Status Aberto / Fechado</label>
+            <select id="input_aberto" style="width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:8px;">
+              <option value="true">🟢 Aberto Agora</option>
+              <option value="false">🔴 Fechado</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Posição Destaque</label>
+            <select id="input_destaque" style="width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:8px;">
+              <option value="false">Padrão</option>
+              <option value="true">⭐ Destaque no Topo</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Produtos / Destaques Comerciais</label>
+          <input id="input_prod" placeholder="Ex: Cimento, argamassa, tintas coral, promoções do mês" style="width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:8px;">
+        </div>
+
+        <div style="margin-top:14px;">
+          <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">Horário de Funcionamento</label>
+          <input id="input_horario" placeholder="Ex: Seg a Sex: 08h às 18h | Sáb: 08h às 13h" style="width:100%;padding:12px;border:1px solid #CBD5E1;border-radius:8px;">
+        </div>
+
+        <button type="submit" id="btnSalvarLoja" class="btn-save-store">
+          ✅ SALVAR LOJA
+        </button>
+      </form>
+    </div>
+
+    <!-- LISTAGEM DE LOJAS -->
+    <div id="cardListaLojas" class="admin-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h2 style="margin-bottom:0">Gerenciador de Lojas</h2>
+        <div style="display:flex;gap:8px;">
+          <button onclick="window.exportarBackupJSON()" style="background:#25D366;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
+            📥 Backup JSON
+          </button>
+          <button onclick="window.restaurarPadrao()" style="background:#F1F5F9;color:#334155;border:none;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
+            ♻️ Restaurar Padrão
+          </button>
+        </div>
+      </div>
+
+      <div id="listaLojasAdmin">
+        <!-- Renderizado dinamicamente via admin.js -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/admin.js"></script>
+</body>
+</html>

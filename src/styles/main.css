@@ -1,0 +1,733 @@
+/* ==============================================================================
+   DESIGN SYSTEM - ACHEI AQUI GO (REGIÃO LESTE)
+   Cores: Deep Emerald (#0F2D1F), Electric Orange (#FF6B2B), Neon Green (#00C950)
+   ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap');
+
+:root {
+  --bg-primary: #0A1E14;
+  --bg-secondary: #0F2D1F;
+  --bg-surface: #143B29;
+  --bg-surface-elevated: #1B4A34;
+  --bg-card: #FFFFFF;
+  --text-main: #FFFFFF;
+  --text-muted: #A3B8AD;
+  --text-dark: #0F2319;
+  --text-dark-muted: #597365;
+  --primary: #FF6B2B;
+  --primary-hover: #E8591A;
+  --primary-gradient: linear-gradient(135deg, #FF6B2B 0%, #FF8C42 100%);
+  --accent-green: #00C950;
+  --accent-green-bg: rgba(0, 201, 80, 0.15);
+  --accent-red: #EF4444;
+  --accent-red-bg: rgba(239, 68, 68, 0.15);
+  --whatsapp: #25D366;
+  --whatsapp-hover: #1EBE5D;
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border-card: #E5EBE8;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 24px rgba(255, 107, 43, 0.35);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.5;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(255, 107, 43, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(0, 201, 80, 0.06) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, .brand-font {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* ==============================================================================
+   HEADER & TOP BAR
+   ============================================================================== */
+
+header {
+  background: rgba(15, 45, 31, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 16px 20px;
+  transition: var(--transition);
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(255, 107, 43, 0.4);
+}
+
+.brand-title {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.brand-title span {
+  color: var(--primary);
+}
+
+.badge-regiao {
+  background: var(--accent-green-bg);
+  color: var(--accent-green);
+  border: 1px solid rgba(0, 201, 80, 0.3);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.btn-admin-link {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.btn-admin-link:hover {
+  background: var(--bg-surface);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* ==============================================================================
+   BUSCA E FILTROS DINÂMICOS
+   ============================================================================== */
+
+.search-box {
+  position: relative;
+  width: 100%;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 14px 44px 14px 44px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: var(--transition);
+}
+
+.search-box input:focus {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(255, 107, 43, 0.15);
+}
+
+.search-box input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.search-clear {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-size: 16px;
+  display: none;
+}
+
+/* Controles de Bairros e Localização */
+.controls-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.filters-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.filters-row::-webkit-scrollbar {
+  display: none;
+}
+
+.pill-btn {
+  white-space: nowrap;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pill-btn:hover {
+  background: var(--bg-surface-elevated);
+  color: white;
+}
+
+.pill-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  box-shadow: 0 2px 10px rgba(255, 107, 43, 0.3);
+}
+
+.btn-gps {
+  background: rgba(0, 201, 80, 0.15);
+  border-color: rgba(0, 201, 80, 0.4);
+  color: var(--accent-green);
+}
+
+.btn-gps.active {
+  background: var(--accent-green);
+  color: #0A1E14;
+  border-color: var(--accent-green);
+}
+
+/* ==============================================================================
+   CONTEÚDO PRINCIPAL & CARDS DE LOJAS
+   ============================================================================== */
+
+main {
+  padding: 24px 20px 80px;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.count-text {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.count-text b {
+  color: white;
+}
+
+/* Cards das Lojas */
+.store-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.store-card {
+  background: var(--bg-card);
+  color: var(--text-dark);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-card);
+  cursor: pointer;
+}
+
+.store-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(255, 107, 43, 0.4);
+}
+
+.store-card.destaque {
+  border: 2px solid var(--primary);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF9F5 100%);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.store-info-left {
+  flex: 1;
+}
+
+.store-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.tag-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.tag-badge.featured {
+  background: #FFF0E8;
+  color: var(--primary);
+  border: 1px solid rgba(255, 107, 43, 0.3);
+}
+
+.tag-badge.status-open {
+  background: #E8FAF0;
+  color: #0E8345;
+}
+
+.tag-badge.status-closed {
+  background: #FEEBEB;
+  color: #C52222;
+}
+
+.tag-badge.distance {
+  background: #F1F5F9;
+  color: #475569;
+}
+
+.store-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.25;
+}
+
+.store-meta {
+  font-size: 13px;
+  color: var(--text-dark-muted);
+  margin-top: 4px;
+}
+
+.store-products {
+  font-size: 13px;
+  color: #475569;
+  background: #F8FAFC;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--primary);
+  margin-top: 4px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid #F1F5F9;
+}
+
+.rating-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: #B45309;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-whatsapp {
+  background: var(--whatsapp);
+  color: white;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+  background: var(--whatsapp-hover);
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+}
+
+/* ==============================================================================
+   CALL TO ACTION LOJISTA (BANNER DE CONVERSÃO)
+   ============================================================================== */
+
+.cta-merchant-card {
+  background: var(--primary-gradient);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  margin: 32px 0 20px;
+  box-shadow: var(--shadow-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-merchant-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cta-merchant-card h2 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: white;
+}
+
+.cta-merchant-card p {
+  font-size: 15px;
+  opacity: 0.95;
+  margin-bottom: 20px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-cta-main {
+  background: white;
+  color: var(--primary);
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-cta-main:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* ==============================================================================
+   MODAIS (CADASTRO, DETALHES DA LOJA E LGPD)
+   ============================================================================== */
+
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+  padding: 16px;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal-dialog {
+  background: white;
+  color: var(--text-dark);
+  max-width: 520px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  position: relative;
+  box-shadow: var(--shadow-md);
+  animation: modalEnter 0.25s ease-out;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--bg-secondary);
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: var(--text-dark-muted);
+  margin-top: 2px;
+}
+
+.btn-close-modal {
+  background: #F1F5F9;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #64748B;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-close-modal:hover {
+  background: #E2E8F0;
+  color: black;
+}
+
+/* Formulário do Modal */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1E293B;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #CBD5E1;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 107, 43, 0.15);
+}
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 16px 0;
+  font-size: 12px;
+  color: #475569;
+}
+
+.form-check input {
+  margin-top: 2px;
+  accent-color: var(--primary);
+}
+
+.btn-submit-form {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-submit-form:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 4px 16px rgba(255, 107, 43, 0.4);
+}
+
+/* ==============================================================================
+   BANNER INFORMATIVO DE SUPABASE & STATUS
+   ============================================================================== */
+
+.status-toast {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  display: inline-block;
+  margin-right: 6px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* Banner de Instalação PWA */
+.pwa-banner {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.pwa-banner.show {
+  display: flex;
+}
+
+.btn-pwa-install {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ==============================================================================
+   FOOTER
+   ============================================================================== */
+
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--text-muted);
+  font-size: 13px;
+  border-top: 1px solid var(--border-light);
+  margin-top: 40px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}

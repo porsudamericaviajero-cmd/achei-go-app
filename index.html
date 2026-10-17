@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Achei Aqui GO • O Guia Comercial da Região Leste de Goiânia</title>
+  <meta name="description" content="Encontre comércios, padarias, farmácias, materiais de construção e serviços na Região Leste de Goiânia. Fale direto pelo WhatsApp!">
+  <meta name="theme-color" content="#0F2D1F">
+  
+  <!-- PWA & Mobile Web App Meta -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+  <link rel="apple-touch-icon" href="/icons/icon.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Achei Aqui GO">
+
+  <!-- Open Graph / Redes Sociais -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Achei Aqui GO • Guia Comercial Região Leste">
+  <meta property="og:description" content="O que você procura no seu bairro? Fale direto no WhatsApp com lojas da Região Leste de Goiânia.">
+  <meta property="og:image" content="/icons/icon.svg">
+
+  <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+
+  <!-- TOPO STICKY & HEADER -->
+  <header>
+    <div class="container">
+      <div class="header-top">
+        <a href="/" class="logo-wrap">
+          <img src="/icons/icon.svg" alt="Achei Aqui GO" class="logo-icon">
+          <div>
+            <h1 class="brand-title">Achei Aqui <span>GO</span></h1>
+          </div>
+        </a>
+
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="badge-regiao">Região Leste</span>
+          <a href="/admin.html" class="btn-admin-link">⚙️ Admin</a>
+        </div>
+      </div>
+
+      <!-- Barra de Busca -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          id="inputBusca" 
+          type="search" 
+          placeholder="O que você procura? Ex: cimento, bolo, pneu, padaria, remédio..." 
+          autocomplete="off"
+        >
+        <button id="btnClearBusca" class="search-clear">&times;</button>
+      </div>
+
+      <!-- Controles & Filtros -->
+      <div class="controls-bar">
+        <div class="filters-row" id="bairrosContainer">
+          <!-- Gerado via JavaScript -->
+        </div>
+
+        <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;">
+          <button id="btnGPS" class="pill-btn btn-gps">
+            📍 Perto de Mim (GPS)
+          </button>
+          <button id="btnAbertos" class="pill-btn">
+            🟢 Apenas Abertos Agora
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container">
+
+    <!-- Status do Supabase / Conexão em Nuvem -->
+    <div id="supabaseStatus" class="status-toast">
+      <div><span class="status-dot"></span> Conectando ao banco de dados...</div>
+    </div>
+
+    <!-- Banner PWA para Instalar no Celular -->
+    <div id="pwaInstallBanner" class="pwa-banner">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="/icons/icon.svg" width="32" height="32" alt="Ícone">
+        <div>
+          <b style="font-size:14px">Instale o Achei Aqui GO</b>
+          <p style="font-size:12px;opacity:0.8">Acesse mais rápido direto da sua tela inicial</p>
+        </div>
+      </div>
+      <button id="btnInstallPWA" class="btn-pwa-install">Instalar App</button>
+    </div>
+
+    <!-- Cabeçalho de Resultados -->
+    <div class="results-header">
+      <p id="countResultados" class="count-text">Carregando lojas...</p>
+    </div>
+
+    <!-- Lista de Lojas -->
+    <section id="listaLojas" class="store-list" aria-label="Lojas Cadastradas">
+      <!-- Injetado dinamicamente -->
+    </section>
+
+    <!-- Banner Chamada para Lojistas -->
+    <section class="cta-merchant-card">
+      <h2>🏪 É dono de comércio na Região Leste?</h2>
+      <p>Coloque seu negócio em destaque para os moradores da sua região e receba orçamentos direto no seu WhatsApp!</p>
+      <button class="btn-cta-main" onclick="window.abrirModal('modalCadastroLojista')">
+        ➕ CADASTRAR MINHA LOJA AGORA
+      </button>
+      <p style="font-size:12px;margin-top:14px;opacity:0.85">Cadastro simplificado • Sem burocracia • Teste grátis</p>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+      <p><b>Achei Aqui GO</b> • Guia Comercial Digital da Região Leste de Goiânia</p>
+      <p style="font-size:12px;margin-top:4px;opacity:0.75">
+        Jardim Novo Mundo • Vila Pedroso • Aroeiras • Riviera • Alphaville • Jardim Goiás • Vila Bandeirante
+      </p>
+      <div class="footer-links">
+        <a href="javascript:void(0)" onclick="window.abrirModal('modalLGPD')">Termos de Uso & Privacidade</a>
+        <span>•</span>
+        <a href="https://wa.me/5562996707046" target="_blank" rel="noopener noreferrer">Suporte no WhatsApp: (62) 99670-7046</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ==============================================================================
+       MODAIS
+       ============================================================================== -->
+
+  <!-- Modal 1: Detalhes da Loja -->
+  <div id="modalDetalhesLoja" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div id="conteudoDetalhesLoja">
+        <!-- Preenchido dinamicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Cadastro de Lojista -->
+  <div id="modalCadastroLojista" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">🏪 Cadastrar Minha Loja</h3>
+          <p class="modal-subtitle">Seu comércio no mapa da Região Leste em minutos</p>
+        </div>
+        <button class="btn-close-modal" onclick="window.fecharModal('modalCadastroLojista')">&times;</button>
+      </div>
+
+      <form id="formCadastroLojista">
+        <div class="form-group">
+          <label for="cad_nome">Nome da Empresa / Comércio *</label>
+          <input id="cad_nome" required placeholder="Ex: Panificadora Pão Dourado">
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="form-group">
+            <label for="cad_cat">Categoria *</label>
+            <select id="cad_cat" required>
+              <option value="Confeitaria">Confeitaria & Bolos</option>
+              <option value="Materiais de Construção">Materiais de Construção</option>
+              <option value="Auto Peças">Auto Peças & Mecânica</option>
+              <option value="Padaria">Padaria & Lanchonete</option>
+              <option value="Farmácia">Farmácia & Drogaria</option>
+              <option value="Mercado">Mercado & Mercearia</option>
+              <option value="Restaurante">Restaurante & Delivery</option>
+              <option value="Barbearia">Barbearia & Salão</option>
+              <option value="Pet Shop">Pet Shop & Veterinária</option>
+              <option value="Outros">Outros Serviços</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cad_bairro">Bairro da Região Leste *</label>
+            <select id="cad_bairro" required>
+              <option value="Jardim Novo Mundo">Jardim Novo Mundo</option>
+              <option value="Vila Pedroso">Vila Pedroso</option>
+              <option value="Aroeiras">Aroeiras</option>
+              <option value="Riviera">Riviera</option>
+              <option value="Alphaville Flamboyant">Alphaville Flamboyant</option>
+              <option value="Jardim Goiás">Jardim Goiás</option>
+              <option value="Vila Bandeirante">Vila Bandeirante</option>
+              <option value="Água Branca">Água Branca</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cad_zap">WhatsApp Comercial * (DDD + Número)</label>
+          <input id="cad_zap" required placeholder="(62) 99999-9999" maxlength="15">
+        </div>
+
+        <div class="form-group">
+          <label for="cad_end">Endereço Completo</label>
+          <input id="cad_end" placeholder="Ex: Av. New York, Qd. 12, Lt. 05">
+        </div>
+
+        <div class="form-group">
+          <label for="cad_prod">Principais Produtos / Destaques</label>
+          <input id="cad_prod" placeholder="Ex: Pão quente, bolos artesanais, café expresso">
+        </div>
+
+        <div class="form-group">
+          <label for="cad_horario">Horário de Atendimento</label>
+          <input id="cad_horario" placeholder="Ex: Seg a Sáb: 07h às 19h">
+        </div>
+
+        <!-- Preview Card -->
+        <div style="background:#F8FAFC;border:1px dashed #CBD5E1;border-radius:12px;padding:12px;margin:12px 0;">
+          <p style="font-size:11px;font-weight:700;color:#64748B;text-transform:uppercase;margin-bottom:6px">
+            Prévia de visualização do seu anúncio:
+          </p>
+          <div>
+            <b id="prev_nome" style="color:#0F172A;font-size:15px">Nome da sua Loja</b>
+            <p id="prev_meta" style="font-size:12px;color:#64748B;margin-top:2px">Categoria • Bairro</p>
+            <p id="prev_prod" style="font-size:12px;color:#334155;margin-top:4px;font-style:italic">Seus principais produtos ou serviços</p>
+          </div>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" id="cad_termos" required checked>
+          <label for="cad_termos">
+            Concordo com os Termos de Uso e Política de Privacidade do Achei Aqui GO (LGPD).
+          </label>
+        </div>
+
+        <button type="submit" id="btnSubmitCadastro" class="btn-submit-form">
+          ✅ CADASTRAR E ATIVAR LOJA
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 3: LGPD / Termos de Uso -->
+  <div id="modalLGPD" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Termos & Privacidade</h3>
+          <p class="modal-subtitle">Conformidade com a LGPD (Lei 13.709/2018)</p>
+        </div>
+        <button class="btn-close-modal" onclick="window.fecharModal('modalLGPD')">&times;</button>
+      </div>
+      <div style="font-size:13px;color:#334155;max-height:350px;overflow-y:auto;padding-right:6px;line-height:1.6">
+        <p><b>1. Finalidade da Coleta de Dados:</b> O Achei Aqui GO coleta informações públicas de contato comercial (nome da empresa, bairro, categoria e número de WhatsApp comercial) com a finalidade exclusiva de viabilizar a conexão entre consumidores e estabelecimentos comerciais locais na Região Leste de Goiânia.</p>
+        <br>
+        <p><b>2. Consentimento e Privacidade:</b> Ao cadastrar um estabelecimento, o lojista autoriza a publicação de seus dados comerciais para fins de divulgação e contato público de clientes.</p>
+        <br>
+        <p><b>3. Direitos do Titular (LGPD):</b> O lojista pode solicitar a qualquer momento a alteração, correção ou exclusão dos dados de sua empresa entrando em contato diretamente com o suporte via WhatsApp no número (62) 99670-7046.</p>
+        <br>
+        <p><b>4. Segurança:</b> Não comercializamos nem compartilhamos bancos de dados com terceiros para fins de spam.</p>
+      </div>
+      <button class="btn-submit-form" style="margin-top:16px" onclick="window.fecharModal('modalLGPD')">
+        Entendido e Concordo
+      </button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
