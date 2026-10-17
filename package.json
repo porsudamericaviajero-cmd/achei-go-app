@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "## Estrutura - index.html -> App Cliente (8 lojas + auto-cadastro lojista no final) - admin.html -> Painel Admin (EDITAR/Excluir, acesso em /admin.html) - lojas.json -> Backup das lojas - vercel.json -> Config Vercel - README.md",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
